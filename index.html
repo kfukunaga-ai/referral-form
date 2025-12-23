@@ -122,7 +122,8 @@ document.getElementById("referralForm").addEventListener("submit", function(e) {
 
   const data = Object.fromEntries(new FormData(this).entries());
 
-  fetch("https://script.google.com/macros/s/AKfycbwYYs-fS4Z-K69tPZviPpehDc0QJmg1Q0fv1mv6sM33DLxOWWEVt-KC7SfSeSMXQrXDxQ/exec", {
+  fetch("fetch("https://script.google.com/macros/s/AKfycbzqh6f9Dj4w9s4NbIIsUnWhrGcOOF2hG2HV_izjRlxCUwWc45fEp9y3jVc6Mb52RJgQfA/exec", {
+", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data)
