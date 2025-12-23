@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ご紹介フォーム｜大谷自動車</title>
+
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Noto Sans JP", sans-serif;
+  background: #ffffff;
+  color: #333;
+}
+
+.wrapper {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+h2 {
+  color: #c7000a;
+  font-size: 22px;
+  border-left: 6px solid #c7000a;
+  padding-left: 10px;
+  margin-bottom: 20px;
+}
+
+.section {
+  margin-bottom: 26px;
+}
+
+.section h3 {
+  font-size: 17px;
+  color: #c7000a;
+  margin-bottom: 12px;
+}
+
+input, select {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 14px;
+  font-size: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+button {
+  width: 100%;
+  padding: 16px;
+  background: #c7000a;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:active {
+  opacity: 0.85;
+}
+
+#thanks {
+  display: none;
+  text-align: center;
+  font-size: 17px;
+  color: #c7000a;
+  margin-top: 30px;
+  line-height: 1.6;
+}
+</style>
+</head>
+
+<body>
+<div class="wrapper">
+  <h2>ご紹介フォーム</h2>
+
+  <form id="referralForm">
+    <div class="section">
+      <h3>ご紹介者様</h3>
+      <input name="referrer_name" placeholder="お名前" required>
+      <input name="referrer_tel" placeholder="電話番号" required>
+      <input name="referrer_email" placeholder="メールアドレス">
+    </div>
+
+    <div class="section">
+      <h3>ご紹介されるお客様</h3>
+      <input name="customer_name" placeholder="お名前" required>
+      <input name="customer_tel" placeholder="電話番号" required>
+      <input name="customer_email" placeholder="メールアドレス">
+    </div>
+
+    <div class="section">
+      <h3>ご来店希望</h3>
+      <select name="shop" required>
+        <option value="">店舗を選択してください</option>
+        <option value="大阪店（泉佐野市）">大阪店（泉佐野市）</option>
+        <option value="和歌山店（和歌山市）">和歌山店（和歌山市）</option>
+      </select>
+
+      <input type="date" name="visit_date">
+      <input name="visit_time" placeholder="ご希望時間（例：10:00〜12:00）">
+    </div>
+
+    <button type="submit">送信する</button>
+  </form>
+
+  <div id="thanks">
+    送信ありがとうございました。<br>
+    内容を確認後、担当者よりご連絡いたします。
+  </div>
+</div>
+
+<script>
+document.getElementById("referralForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const data = Object.fromEntries(new FormData(this).entries());
+
+  fetch("https://script.google.com/macros/s/AKfycbwYYs-fS4Z-K69tPZviPpehDc0QJmg1Q0fv1mv6sM33DLxOWWEVt-KC7SfSeSMXQrXDxQ/exec", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  })
+  .then(() => {
+    document.getElementById("referralForm").style.display = "none";
+    document.getElementById("thanks").style.display = "block";
+  })
+  .catch(() => {
+    alert("送信に失敗しました。時間をおいて再度お試しください。");
+  });
+});
+</script>
+</body>
+</html>
