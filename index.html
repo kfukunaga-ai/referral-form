@@ -117,25 +117,34 @@ button:active {
 </div>
 
 <script>
-document.getElementById("referralForm").addEventListener("submit", function(e) {
+document.getElementById("referralForm").addEventListener("submit", function(e){
   e.preventDefault();
 
-  const data = Object.fromEntries(new FormData(this).entries());
+  const f = e.target;
+  const data = {
+    referrer_name: f.referrer_name.value,
+    referrer_tel: f.referrer_tel.value,
+    referrer_email: f.referrer_email.value,
+    customer_name: f.customer_name.value,
+    customer_tel: f.customer_tel.value,
+    customer_email: f.customer_email.value,
+    shop: f.shop.value,
+    visit_date: f.visit_date.value,
+    visit_time: f.visit_time.value
+  };
 
-  fetch("fetch("https://script.google.com/macros/s/AKfycbzqh6f9Dj4w9s4NbIIsUnWhrGcOOF2hG2HV_izjRlxCUwWc45fEp9y3jVc6Mb52RJgQfA/exec", {
-", {
+  fetch("https://script.google.com/macros/s/AKfycbzqh6f9Dj4w9s4NbIIsUnWhrGcOOF2hG2HV_izjRlxCUwWc45fEp9y3jVc6Mb52RJgQfA/exec", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    mode: "no-cors",
+    headers: {
+      "Content-Type": "application/json"
+    },
     body: JSON.stringify(data)
-  })
-  .then(() => {
-    document.getElementById("referralForm").style.display = "none";
-    document.getElementById("thanks").style.display = "block";
-  })
-  .catch(() => {
-    alert("送信に失敗しました。時間をおいて再度お試しください。");
   });
+
+  alert("送信しました");
 });
 </script>
+
 </body>
 </html>
